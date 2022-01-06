@@ -1,9 +1,16 @@
 /* jshint esversion: 8 */
 
 /**
+ * @typedef {object} responseDetails
+ * @property {string} redirectUrl
+ */
+
+/**
  * Filters the URL to remove the `cc.loginfra.com` domain.
  * @param {string} url
- * @returns {(string|null)} The filtered URL or `null` if the URL is not valid.
+ * @returns {(string|undefined)} The filtered URL or nothing if the URL is not valid,
+ * if the url's host is not `cc.loginfra.com`,
+ * or if the url does not have a redirect url ('&u=' search param)
  */
 function filter_url(url) {
   try {
@@ -25,7 +32,7 @@ function filter_url(url) {
  * Handles requests that go to `cc.loginfra.com`.
  * @param {object} requestDetails
  * @param {string} requestDetails.url
- * @returns {object} { redirectUrl: string }
+ * @returns {responseDetails}
  */
 function handleBeforeRequest(requestDetails) {
   if (!requestDetails.url) return;
