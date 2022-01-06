@@ -19,13 +19,13 @@ function filter_url(url) {
     return;
   }
 
-  if (url.hostname === 'cc.loginfra.com') {
-    const original_url = url.search.split('&u=')[1];
-    if (original_url) {
-      const decoded_url = decodeURIComponent(original_url);
-      return decoded_url;
-    }
-  }
+  if (url.hostname !== 'cc.loginfra.com') return;
+
+  const original_url = url.search.split('&u=')[1];
+  if (!original_url) return;
+
+  const decoded_url = decodeURIComponent(original_url);
+  return decoded_url;
 }
 
 /**
