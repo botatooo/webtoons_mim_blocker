@@ -6,7 +6,11 @@
  * @returns {(string|null)} The filtered URL or `null` if the URL is not valid.
  */
 function filter_url(url) {
-  url = new URL(url);
+  try {
+    url = new URL(url);
+  } catch (error) {
+    return;
+  }
 
   if (url.hostname === 'cc.loginfra.com') {
     const original_url = url.search.split('&u=')[1];
